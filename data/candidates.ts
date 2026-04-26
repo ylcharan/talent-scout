@@ -1,0 +1,32 @@
+export const candidates = [
+  {
+    id: 1,
+    name: "Ananya Sharma",
+    skills: ["React", "Node.js", "AWS", "PostgreSQL"],
+    experience: 4,
+    location: "Remote",
+    salary_expectation: 115000,
+    notice_period: 30,
+    preferences: "Remote preferred",
+  },
+  {
+    id: 2,
+    name: "Rahul Verma",
+    skills: ["React", "Node.js"],
+    experience: 2,
+    location: "Onsite",
+    salary_expectation: 90000,
+    notice_period: 15,
+    preferences: "Open to relocation",
+  },
+  {
+    id: 3,
+    name: "Sneha Reddy",
+    skills: ["React", "Next.js", "AWS", "GraphQL"],
+    experience: 5,
+    location: "Hybrid",
+    salary_expectation: 130000,
+    notice_period: 60,
+    preferences: "Hybrid only",
+  },
+];
