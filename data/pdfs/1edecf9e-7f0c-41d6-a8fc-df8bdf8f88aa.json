@@ -1,0 +1,33 @@
+{
+  "job_title": "AI Full Stack Engineer",
+  "company": "NovaTech AI",
+  "location": "Toronto, Canada",
+  "work_mode": "hybrid",
+  "min_experience_years": 3,
+  "required_skills": [
+    "React",
+    "Next.js",
+    "Node.js",
+    "PostgreSQL",
+    "AWS (Lambda, S3)",
+    "REST APIs"
+  ],
+  "optional_skills": [
+    "GraphQL",
+    "LangChain",
+    "Pinecone",
+    "Docker"
+  ],
+  "responsibilities": [
+    "Build web apps using React and Next.js",
+    "Develop backend APIs using Node.js",
+    "Integrate AI models (LLMs, RAG systems)",
+    "Deploy services on AWS (Lambda, S3, RDS)",
+    "Collaborate with product and design teams"
+  ],
+  "education": "Bachelor’s in Computer Science or equivalent",
+  "salary_range": "$100,000 - $130,000",
+  "seniority_level": "mid-level",
+  "domain": "AI software development",
+  "summary": "Seeking an AI Full Stack Engineer to develop scalable AI-driven applications across frontend, backend, and AI systems with expertise in React, Node.js, and AWS."
+}

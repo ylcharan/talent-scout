@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 type Candidate = {
   id: number;
@@ -37,6 +37,26 @@ type ParsedJD = {
 };
 
 export default function MatchResultsPage() {
+  return (
+    <Suspense fallback={<MatchResultsLoading />}>
+      <MatchResultsContent />
+    </Suspense>
+  );
+}
+
+function MatchResultsLoading() {
+  return (
+    <main className="min-h-screen bg-gray-50 px-6 py-10">
+      <div className="mx-auto max-w-6xl">
+        <div className="rounded-2xl bg-white p-8 shadow text-center">
+          <p className="text-gray-600">Loading results...</p>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function MatchResultsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [parsedJD, setParsedJD] = useState<ParsedJD | null>(null);
@@ -63,15 +83,7 @@ export default function MatchResultsPage() {
   }, [searchParams]);
 
   if (loading) {
-    return (
-      <main className="min-h-screen bg-gray-50 px-6 py-10">
-        <div className="mx-auto max-w-6xl">
-          <div className="rounded-2xl bg-white p-8 shadow text-center">
-            <p className="text-gray-600">Loading results...</p>
-          </div>
-        </div>
-      </main>
-    );
+    return <MatchResultsLoading />;
   }
 
   if (!parsedJD || candidates.length === 0) {
@@ -140,7 +152,7 @@ export default function MatchResultsPage() {
               {parsedJD.required_skills.map((skill, index) => (
                 <span
                   key={index}
-                  className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
+                  className="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-900"
                 >
                   {skill}
                 </span>
@@ -195,12 +207,12 @@ export default function MatchResultsPage() {
                       {candidate.experience} years
                     </td>
                     <td className="p-4">
-                      <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">
+                      <span className="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm font-semibold text-gray-900">
                         {candidate.matchScore}%
                       </span>
                     </td>
                     <td className="p-4">
-                      <span className="rounded-full bg-purple-100 px-3 py-1 text-sm font-semibold text-purple-800">
+                      <span className="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm font-semibold text-gray-900">
                         {candidate.interestScore}%
                       </span>
                     </td>
@@ -208,10 +220,10 @@ export default function MatchResultsPage() {
                       <span
                         className={`rounded-full px-3 py-1 text-sm font-bold ${
                           candidate.finalScore >= 80
-                            ? "bg-green-100 text-green-800"
+                            ? "bg-black text-white"
                             : candidate.finalScore >= 60
-                              ? "bg-yellow-100 text-yellow-800"
-                              : "bg-red-100 text-red-800"
+                              ? "bg-gray-200 text-gray-900"
+                              : "bg-white text-gray-900 border border-gray-300"
                         }`}
                       >
                         {candidate.finalScore}%
@@ -221,10 +233,10 @@ export default function MatchResultsPage() {
                       <span
                         className={`rounded-full px-3 py-1 text-sm font-semibold ${
                           candidate.risk === "High"
-                            ? "bg-red-100 text-red-800"
+                            ? "bg-black text-white"
                             : candidate.risk === "Medium"
-                              ? "bg-yellow-100 text-yellow-800"
-                              : "bg-green-100 text-green-800"
+                              ? "bg-gray-200 text-gray-900"
+                              : "bg-white text-gray-900 border border-gray-300"
                         }`}
                       >
                         {candidate.risk}
@@ -241,15 +253,15 @@ export default function MatchResultsPage() {
 
           {/* Summary Stats */}
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <div className="rounded-lg bg-green-50 p-4 border border-green-200">
+            <div className="rounded-lg border border-gray-300 bg-white p-4">
               <p className="text-sm text-gray-600">Schedule Interview</p>
-              <p className="mt-1 text-2xl font-bold text-green-600">
+              <p className="mt-1 text-2xl font-bold text-gray-900">
                 {candidates.filter((c) => c.finalScore > 80).length}
               </p>
             </div>
-            <div className="rounded-lg bg-yellow-50 p-4 border border-yellow-200">
+            <div className="rounded-lg border border-gray-300 bg-white p-4">
               <p className="text-sm text-gray-600">Keep Warm</p>
-              <p className="mt-1 text-2xl font-bold text-yellow-600">
+              <p className="mt-1 text-2xl font-bold text-gray-900">
                 {
                   candidates.filter(
                     (c) => c.finalScore > 60 && c.finalScore <= 80,
@@ -257,9 +269,9 @@ export default function MatchResultsPage() {
                 }
               </p>
             </div>
-            <div className="rounded-lg bg-red-50 p-4 border border-red-200">
+            <div className="rounded-lg border border-gray-300 bg-white p-4">
               <p className="text-sm text-gray-600">Reject</p>
-              <p className="mt-1 text-2xl font-bold text-red-600">
+              <p className="mt-1 text-2xl font-bold text-gray-900">
                 {candidates.filter((c) => c.finalScore <= 60).length}
               </p>
             </div>

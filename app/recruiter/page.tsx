@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type ParsedJD = {
   job_title: string;
@@ -20,7 +19,7 @@ type ParsedJD = {
   summary: string;
 };
 
-export default function JDParserPage() {
+export default function RecruiterPage() {
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [parsedJD, setParsedJD] = useState<ParsedJD | null>(null);
@@ -109,8 +108,15 @@ export default function JDParserPage() {
   return (
     <main className="min-h-screen bg-gray-50 px-6 py-10">
       <div className="mx-auto max-w-5xl">
+        <button
+          onClick={() => router.push("/")}
+          className="mb-6 rounded-lg bg-gray-200 px-4 py-2 text-gray-800 hover:bg-gray-300 transition"
+        >
+          ← Back to Home
+        </button>
+
         <div className="rounded-2xl bg-white p-8 shadow">
-          <h1 className="text-3xl font-bold text-gray-900">TalentScout AI</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Post a Job</h1>
 
           <p className="mt-2 text-gray-600">
             Upload a JD PDF. The system extracts text, chunks it, parses each

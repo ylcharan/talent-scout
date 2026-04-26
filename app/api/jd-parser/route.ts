@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
+import { writeFile, mkdir } from "fs/promises";
+import path from "path";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -105,6 +107,20 @@ Use this exact structure:
         },
         { status: 500 },
       );
+    }
+
+    // Save parsed JD to data/pdfs directory
+    try {
+      const pdfsDir = path.join(process.cwd(), "data", "pdfs");
+      await mkdir(pdfsDir, { recursive: true });
+
+      const filename = `${Date.now()}_${file.name.replace(".pdf", ".json")}`;
+      const filePath = path.join(pdfsDir, filename);
+      await writeFile(filePath, JSON.stringify(parsedJD, null, 2));
+
+      console.log(`Job description saved to ${filePath}`);
+    } catch (saveError: any) {
+      console.error("Error saving job description:", saveError);
     }
 
     return NextResponse.json({

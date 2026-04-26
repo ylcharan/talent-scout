@@ -1,0 +1,28 @@
+{
+  "job_title": "Backend Engineer",
+  "company": "ScaleOps",
+  "location": "Remote",
+  "work_mode": "remote",
+  "min_experience_years": 2,
+  "required_skills": [
+    "Node.js",
+    "Express",
+    "MongoDB or PostgreSQL",
+    "Docker"
+  ],
+  "optional_skills": [
+    "Redis",
+    "AWS ECS"
+  ],
+  "responsibilities": [
+    "Design REST APIs",
+    "Work with databases",
+    "Optimize backend performance",
+    "Handle authentication and security"
+  ],
+  "education": "",
+  "salary_range": "$80,000 - $100,000",
+  "seniority_level": "Mid-level",
+  "domain": "SaaS platform development",
+  "summary": "Responsible for quickly building scalable APIs for the SaaS platform with emphasis on performance, security, and database management."
+}
